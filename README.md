@@ -94,3 +94,4 @@ Upon initial startup, the `DataInitializer` automatically seeds default roles an
 - **Password**: `admin123`
 - **Roles**: `ROLE_ADMIN`, `ROLE_USER`
 # lakeside-hotel
+# lakeside-hotel
