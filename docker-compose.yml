@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: lakeside_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: lakeside_hotel_db
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    restart: always
+
+  backend:
+    build: ./lakeside-hotel
+    container_name: lakeside_backend
+    ports:
+      - "9192:9192"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/lakeside_hotel_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: example_user
+      SPRING_DATASOURCE_PASSWORD: password
+    depends_on:
+      - mysqldb
+    restart: always
