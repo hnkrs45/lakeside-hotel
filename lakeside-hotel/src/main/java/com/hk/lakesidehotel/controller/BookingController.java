@@ -66,7 +66,7 @@ public class BookingController {
                                          @RequestBody BookedRoom bookingRequest) {
         try {
             String confirmationCode = bookingService.saveBooking(roomId, bookingRequest);
-            return ResponseEntity.ok("Room Booked Successfully! Confirmation Code: " + confirmationCode);
+            return ResponseEntity.ok(confirmationCode);
         } catch (InvalidBookingRequestException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -79,7 +79,10 @@ public class BookingController {
     }
 
     private BookingResponse getBookingResponse(BookedRoom booking) {
-        Room theRoom = roomService.getRoomById(booking.getRoom().getId()).orElse(null);
+        Room theRoom = null;
+        if (booking.getRoom() != null) {
+            theRoom = roomService.getRoomById(booking.getRoom().getId()).orElse(booking.getRoom());
+        }
         RoomResponse room = null;
         if (theRoom != null) {
             room = new RoomResponse(theRoom.getId(), theRoom.getRoomType(), theRoom.getRoomPrice());
@@ -94,6 +97,6 @@ public class BookingController {
                 booking.getNumOfChildren(),
                 booking.getTotalNumOfGuest(),
                 booking.getBookingConfirmationCode(),
-                theRoom);
+                room);
     }
 }

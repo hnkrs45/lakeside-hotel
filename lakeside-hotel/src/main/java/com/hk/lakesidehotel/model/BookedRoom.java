@@ -1,11 +1,14 @@
 package com.hk.lakesidehotel.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookedRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +21,21 @@ public class BookedRoom {
     private LocalDate checkOutDate;
 
     @Column(name = "guest_FullName")
+    @JsonProperty("guestFullName")
+    @JsonAlias({"guestName", "guest_name", "guest_full_name"})
     private String guestFullName;
 
     @Column(name = "guest_Email")
     private String guestEmail;
 
     @Column(name = "adults")
+    @JsonProperty("numOfAdults")
+    @JsonAlias({"numberOfAdults", "num_of_adults", "NumOfAdults", "adults"})
     private int NumOfAdults;
 
     @Column(name = "children")
+    @JsonProperty("numOfChildren")
+    @JsonAlias({"numberOfChildren", "num_of_children", "NumOfChildren", "children"})
     private int NumOfChildren;
 
     @Column(name = "total_guest")
@@ -138,6 +147,8 @@ public class BookedRoom {
         this.room = room;
     }
 
+    @PrePersist
+    @PreUpdate
     public void calculateTotalNumberOfGuest() {
         this.totalNumOfGuest = this.NumOfAdults + this.NumOfChildren;
     }

@@ -9,9 +9,9 @@ const RoomCard = ({ room }) => {
         : defaultRoomPhoto;
 
     return (
-        <Col key={room.id} className="mb-4 xs={12}">
+        <Col key={room.id} xs={12} className="mb-4">
             <Card className="shadow-sm border-0 rounded-4 h-100 overflow-hidden">
-                <Card.Body className="d-flex flex-column flex-md-row align-items-center p-3">
+                <Card.Body className="room-card-body d-flex flex-column flex-md-row align-items-center p-3">
                     <div className="flex-shrink-0 me-md-3 mb-3 mb-md-0 w-100 w-md-auto" style={{ maxWidth: '220px' }}>
                         <Card.Img
                             variant="top"
@@ -22,7 +22,7 @@ const RoomCard = ({ room }) => {
                         />
                     </div>
 
-                    <div className="flex-grow-1 px-md-3 text-center text-md-start">
+                    <div className="room-card-details flex-grow-1 px-md-3 text-center text-md-start">
                         <Card.Title className="hotel-color fw-bold fs-5 mb-1">{room.roomType}</Card.Title>
                         <Card.Title className="room-price fw-semibold text-warning mb-2">${room.roomPrice} / Night</Card.Title>
                         <Card.Text className="text-muted small mb-0">
@@ -30,8 +30,8 @@ const RoomCard = ({ room }) => {
                         </Card.Text>
                     </div>
 
-                    <div className="flex-shrink-0 mt-3 mt-md-0">
-                        <Link to={`/search-rooms`} className="btn btn-hotel btn-sm rounded-pill px-4 py-2 shadow-sm">
+                    <div className="room-card-action flex-shrink-0 mt-3 mt-md-0">
+                        <Link to={`/book-room/${room.id}`} className="btn btn-hotel btn-sm rounded-pill px-4 py-2 shadow-sm">
                             Book Now
                         </Link>
                     </div>

@@ -29,9 +29,9 @@ import java.util.Optional;
 @RequestMapping("/rooms")
 public class RoomController {
     private final IRoomService roomService;
-    private final BookingService bookingService;
+    private final com.hk.lakesidehotel.service.IBookingService bookingService;
 
-    public RoomController(IRoomService roomService, BookingService bookingService) {
+    public RoomController(IRoomService roomService, com.hk.lakesidehotel.service.IBookingService bookingService) {
         this.roomService = roomService;
         this.bookingService = bookingService;
     }

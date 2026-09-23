@@ -88,10 +88,10 @@ export async function addRoom(photo, roomType, roomPrice) {
 
 export async function getRoomTypes() {
     try {
-        const response = await api.get('/rooms/types');
+        const response = await api.get('/rooms/room/types');
         return response.data;
     } catch (error) {
-        throw new Error('Error fetching room types');
+        throw new Error(error.response?.data?.message || 'Error fetching room types');
     }
 }
 
@@ -106,9 +106,8 @@ export async function getAllRooms() {
 
 export async function getAvailableRooms(checkInDate, checkOutDate, roomType) {
     try {
-        const result = await api.get(
-            `/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`
-        );
+        const params = new URLSearchParams({ checkInDate, checkOutDate, roomType });
+        const result = await api.get(`/rooms/available-rooms?${params.toString()}`);
         return result.data;
     } catch (error) {
         throw new Error('Error fetching available rooms');

@@ -8,9 +8,7 @@ const MainHeader = () => {
             style={{
                 backgroundImage: `url(${heroImg})`,
                 backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                position: 'relative',
-                height: '500px'
+                backgroundPosition: 'center'
             }}
         >
             <div className="overlay"></div>

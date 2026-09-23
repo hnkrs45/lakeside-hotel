@@ -13,19 +13,21 @@ import Registration from './components/auth/Registration';
 import Profile from './components/auth/Profile';
 import RoomSearch from './components/room/RoomSearch';
 import FindBooking from './components/bookings/FindBooking';
+import BookingForm from './components/bookings/BookingForm';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
     return (
         <AuthProvider>
-            <main>
+            <main className="app-shell">
                 <Router>
                     <NavBar />
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/browse-all-rooms" element={<RoomListing />} />
                         <Route path="/search-rooms" element={<RoomSearch />} />
+                        <Route path="/book-room/:roomId" element={<BookingForm />} />
                         <Route path="/find-booking" element={<FindBooking />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Registration />} />

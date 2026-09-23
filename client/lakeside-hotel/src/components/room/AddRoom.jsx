@@ -1,6 +1,5 @@
 import React from 'react'
-import {addRoom, getAllRooms} from '../utils/ApiFunctions'
-import RoomTypeSelector from '../common/RoomTypeSelector'
+import {addRoom} from '../utils/ApiFunctions'
 import { Link } from 'react-router-dom'
 
 const AddRoom = () => {
@@ -11,42 +10,8 @@ const AddRoom = () => {
     })
 
     const [imagePreview, setImagePreview] = React.useState('')
-    const [addedRoom, setAddedRoom] = React.useState(null)
-    const [rooms, setRooms] = React.useState([])
-    const [roomsError, setRoomsError] = React.useState('')
     const[successMessage, setSuccessMessage] = React.useState('')
     const[errorMessage, setErrorMessage] = React.useState('')
-
-    const loadRooms = async () => {
-        try {
-            const data = await getAllRooms()
-            setRooms(data)
-            setRoomsError('')
-        } catch {
-            setRoomsError('Unable to load rooms. Check that GET /rooms/all-rooms is publicly accessible.')
-        }
-    }
-
-    React.useEffect(() => {
-        let isCurrent = true
-
-        getAllRooms()
-            .then((data) => {
-                if (isCurrent) {
-                    setRooms(data)
-                    setRoomsError('')
-                }
-            })
-            .catch(() => {
-                if (isCurrent) {
-                    setRoomsError('Unable to load rooms. Check that GET /rooms/all-rooms is publicly accessible.')
-                }
-            })
-
-        return () => {
-            isCurrent = false
-        }
-    }, [])
 
     const handleRoomInputChange = (e) => {
         const name = e.target.name
@@ -78,16 +43,10 @@ const AddRoom = () => {
         try{
             const success = await addRoom(newRoom.photo, newRoom.roomType, newRoom.roomPrice)
             if(success){
-                setAddedRoom({
-                    roomType: newRoom.roomType,
-                    roomPrice: newRoom.roomPrice,
-                    imageUrl: imagePreview
-                })
-                setSuccessMessage('A new room was added to the database')
+                setSuccessMessage('Room created successfully. It is now available for booking searches.')
                 setNewRoom({photo: null, roomType: '', roomPrice: ''})
                 setImagePreview('')
                 setErrorMessage('')
-                await loadRooms()
             }
             else{
                 setErrorMessage('Error adding new room')
@@ -107,7 +66,8 @@ const AddRoom = () => {
             <section className='container mt-5 mb-5'>
                 <div className='row justify-content-center'>
                     <div className='col-md-8 col-lg-6'>
-                        <h2 className='mt-5 mb-2'>Add a New Room</h2>
+                        <h2 className='mt-5 mb-2'>Create a Room</h2>
+                        <p className='text-muted mb-4'>Create the room type, price, and photo together. Room types become available in the booking search after the room is saved.</p>
                         {successMessage && (
                             <div className='alert alert-success fade show'>{successMessage} </div>
                         )}
@@ -117,13 +77,18 @@ const AddRoom = () => {
                         <form onSubmit={handleSubmit}>
                             <div className='mb-3'>
                                 <label htmlFor='roomType' className='form-label'>
-                                    Room Type
+                                    Room Type or Name
                                 </label>
-                                <div>
-                                    <RoomTypeSelector handleRoomInputChange={handleRoomInputChange}
-                                    newRoom={newRoom}
-                                    />
-                                </div>
+                                <input
+                                    className='form-control'
+                                    required
+                                    id='roomType'
+                                    type='text'
+                                    name='roomType'
+                                    value={newRoom.roomType}
+                                    onChange={handleRoomInputChange}
+                                    placeholder='e.g. Lakeside Deluxe'
+                                />
                             </div>
 
                             <div className='mb-3'>
@@ -161,11 +126,11 @@ const AddRoom = () => {
                             </div>
                             
                             <div className='d-grid d-md-flex mt-2'>
-                                <Link to={'/existing-rooms'} className='btn btn-outline-info'>
+                                <Link to={'/existing-rooms'} className='btn btn-outline-info me-md-2 mb-2 mb-md-0'>
                                     Back
                                 </Link>
-                                <button className='btn btn-outline-primary ml-5'>
-                                    Save Room
+                                <button type='submit' className='btn btn-outline-primary'>
+                                    Create Room
                                 </button>
                             </div>
                         </form>

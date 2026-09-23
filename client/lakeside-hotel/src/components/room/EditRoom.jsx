@@ -120,7 +120,7 @@ const EditRoom = () => {
                 <img
                   src={`data:image/jpeg;base64,${imagePreview}`}
                   alt="Room Preview"
-                  style={{maxWidth: '400px', maxHeight: '400'}}
+                  style={{maxWidth: '100%', maxHeight: '400px'}}
                   className="mt-3" 
                 />
               )}

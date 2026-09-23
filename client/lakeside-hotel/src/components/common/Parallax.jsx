@@ -8,11 +8,9 @@ const Parallax = () => {
             className="parallax mb-5 rounded-4 shadow-lg overflow-hidden position-relative"
             style={{
                 backgroundImage: `url(${parallaxImg})`,
-                backgroundAttachment: 'fixed',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
-                height: '45vh',
                 display: 'flex',
                 alignItems: 'center'
             }}

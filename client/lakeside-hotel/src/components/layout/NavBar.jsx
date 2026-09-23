@@ -25,11 +25,11 @@ const NavBar = () => {
 
     return (
         <header className="bg-white shadow-sm sticky-top border-bottom" style={{ zIndex: 1000 }}>
-            <div className="container-fluid px-3 px-md-5 py-3 d-flex align-items-center justify-content-between flex-wrap">
+            <div className="container-fluid navbar-inner px-3 px-md-5 py-3 d-flex align-items-center justify-content-between flex-wrap">
                 {/* Brand Logo */}
-                <Link to="/" className="d-flex align-items-center text-decoration-none me-4" onClick={closeAll}>
+                <Link to="/" className="navbar-brand-link d-flex align-items-center text-decoration-none me-4" onClick={closeAll}>
                     <FaHotel className="me-2" size={28} style={{ color: 'rgb(169, 77, 123)' }} />
-                    <span className="fw-bold fs-4" style={{ color: 'rgb(169, 77, 123)', letterSpacing: '-0.5px' }}>
+                    <span className="navbar-brand-text fw-bold fs-4" style={{ color: 'rgb(169, 77, 123)', letterSpacing: '-0.5px' }}>
                         LakeSide Hotel
                     </span>
                 </Link>
@@ -44,7 +44,7 @@ const NavBar = () => {
                 </button>
 
                 {/* Navigation Links */}
-                <div className={`align-items-center gap-2 gap-lg-3 ${mobileMenuOpen ? 'd-flex flex-column w-100 mt-3 align-items-start' : 'd-none d-md-flex'}`}>
+                <div className={`navbar-links align-items-center gap-2 gap-lg-3 ${mobileMenuOpen ? 'd-flex flex-column w-100 mt-3 align-items-start' : 'd-none d-md-flex'}`}>
                     <NavLink
                         className={({ isActive }) =>
                             `px-3 py-2 rounded-3 text-decoration-none fw-semibold ${isActive ? 'bg-light fw-bold' : ''}`

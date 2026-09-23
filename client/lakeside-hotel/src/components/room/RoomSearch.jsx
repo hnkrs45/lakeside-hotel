@@ -13,10 +13,13 @@ const RoomSearch = () => {
     const [availableRooms, setAvailableRooms] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [roomTypesError, setRoomTypesError] = useState("");
     const [hasSearched, setHasSearched] = useState(false);
 
     useEffect(() => {
-        getRoomTypes().then((types) => setRoomTypes(types)).catch(console.error);
+        getRoomTypes()
+            .then((types) => setRoomTypes(Array.isArray(types) ? types.filter(Boolean) : []))
+            .catch((error) => setRoomTypesError(error.message));
     }, []);
 
     const handleInputChange = (e) => {
@@ -103,6 +106,9 @@ const RoomSearch = () => {
                                     </option>
                                 ))}
                             </select>
+                            {roomTypesError && (
+                                <div className="form-text text-danger">{roomTypesError}</div>
+                            )}
                         </div>
 
                         <div className="col-md-2">

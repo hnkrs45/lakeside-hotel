@@ -56,7 +56,7 @@ const RoomCarousel = () => {
                                         return (
                                             <Col key={room.id} className="mb-4" xs={12} md={6} lg={3}>
                                                 <Card className="shadow-sm border-0 rounded-4 overflow-hidden h-100">
-                                                    <Link to={`/search-rooms`}>
+                                                    <Link to={`/book-room/${room.id}`}>
                                                         <Card.Img
                                                             variant="top"
                                                             src={photoSrc}
@@ -71,7 +71,7 @@ const RoomCarousel = () => {
                                                             <Card.Title className="room-price text-warning fw-semibold fs-6">${room.roomPrice} / night</Card.Title>
                                                         </div>
                                                         <div className="mt-3">
-                                                            <Link className="btn btn-sm btn-hotel w-100 rounded-pill" to={`/search-rooms`}>
+                                                            <Link className="btn btn-sm btn-hotel w-100 rounded-pill" to={`/book-room/${room.id}`}>
                                                                 Book Now
                                                             </Link>
                                                         </div>

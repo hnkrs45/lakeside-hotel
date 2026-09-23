@@ -1,7 +1,5 @@
 package com.hk.lakesidehotel.response;
 
-import com.hk.lakesidehotel.model.Room;
-
 import java.time.LocalDate;
 
 public class BookingResponse {
@@ -14,7 +12,7 @@ public class BookingResponse {
     private int NumOfChildren;
     private int totalNumOfGuest;
     private String bookingConfirmationCode;
-    private Room room;
+    private RoomResponse room;
 
     public BookingResponse() {
     }
@@ -26,7 +24,7 @@ public class BookingResponse {
         this.bookingConfirmationCode = bookingConfirmationCode;
     }
 
-    public BookingResponse(Long id, LocalDate checkInDate, LocalDate checkOutDate, String guestFullName, String guestEmail, int numOfAdults, int numOfChildren, int totalNumOfGuest, String bookingConfirmationCode, Room room) {
+    public BookingResponse(Long id, LocalDate checkInDate, LocalDate checkOutDate, String guestFullName, String guestEmail, int numOfAdults, int numOfChildren, int totalNumOfGuest, String bookingConfirmationCode, RoomResponse room) {
         this.id = id;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -111,11 +109,11 @@ public class BookingResponse {
         this.bookingConfirmationCode = bookingConfirmationCode;
     }
 
-    public Room getRoom() {
+    public RoomResponse getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(RoomResponse room) {
         this.room = room;
     }
 }
